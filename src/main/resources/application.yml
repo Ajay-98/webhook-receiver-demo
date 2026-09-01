@@ -1,0 +1,20 @@
+server:
+  port: 8082
+
+spring:
+  application:
+    name: webhook-receiver-demo
+
+# The shared secret used to verify HMAC signatures on incoming webhooks.
+# In a real system this would be per-subscriber (each subscriber gets their
+# own secret when they register), fetched from a secrets store - not a single
+# global value in a properties file. Kept simple here since we're one sender,
+# one receiver, for learning purposes.
+webhook:
+  # Reject any webhook whose timestamp is older than this, to limit replay window.
+  timestamp-tolerance-seconds: 300
+  shared-secret: "demo-shared-secret-change-me"
+
+logging:
+  level:
+    com.ajay.webhookreceiver: DEBUG
